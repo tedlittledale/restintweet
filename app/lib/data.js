@@ -48,4 +48,34 @@ export async function search({ text }) {
   // Use the queryEmbedding for further processing
 }
 
-export async function stats() {}
+export async function stats() {
+  //fetch the stats from the database
+  const client = new MongoClient(uri);
+  try {
+    await client.connect();
+    const database = client.db("RestInTweet"); // Replace with your database name
+    const collection = database.collection("stats"); // Replace with your collection name
+
+    //fetch the first row from the stats collection
+    const stats = await collection.findOne();
+    return stats;
+  } finally {
+    await client.close();
+  }
+}
+
+export async function keywords() {
+  //fetch the keywords from the database
+  const client = new MongoClient(uri);
+  try {
+    await client.connect();
+    const database = client.db("RestInTweet"); // Replace with your database name
+    const collection = database.collection("keywords"); // Replace with your collection name
+
+    //fetch all the keywords from the keywords collection
+    const keywords = await collection.find().toArray();
+    return keywords;
+  } finally {
+    await client.close();
+  }
+}

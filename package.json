@@ -17,6 +17,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-tweet": "^3.2.1",
+    "react-wordcloud": "^1.2.7",
     "use-debounce": "^10.0.2"
   },
   "devDependencies": {
