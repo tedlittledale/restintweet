@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Suspense } from "react";
 import Search from "./ui/search";
 import Tweets from "./ui/tweets";
 
@@ -25,7 +25,12 @@ export default async function Home({
         <h1 className="text-4xl font-bold mb-8">Rest In Tweet</h1>
         <div className="mb-8">
           <Search placeholder="Search Ted's tweets" />
-          {results.length > 0 && <Tweets results={results} />}
+
+          {results.length > 0 && (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Tweets results={results} />
+            </Suspense>
+          )}
         </div>
         <section>
           <h2 className="text-2xl font-bold mb-4">Stats</h2>
