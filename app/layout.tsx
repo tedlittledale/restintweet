@@ -14,9 +14,9 @@ export const metadata: Metadata = {
     siteName: "Rest In Tweet",
     images: [
       {
-        url: "https://restintweet.tedspace.dev/og.png",
-        width: 800,
-        height: 600,
+        url: "https://restintweet.tedspace.dev/og.jpg",
+        width: 791,
+        height: 415,
       },
     ],
     locale: "en_US",
