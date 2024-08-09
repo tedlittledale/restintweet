@@ -15,8 +15,6 @@ export default function Home({
   const query = searchParams?.query || "";
   console.log({ query });
 
-  console.log({ query });
-
   // const keywordsData = await keywords();
   // console.log({ keywordsData });
   return (
@@ -29,7 +27,7 @@ export default function Home({
 
           {query !== "" && <Tweets query={query} />}
         </div>
-        {/* <Stats /> */}
+
         <section></section>
       </div>
     </main>

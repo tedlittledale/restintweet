@@ -35,7 +35,7 @@ export async function GET(req) {
       input: query,
       encoding_format: "float",
     });
-    let tweets = [];
+    let searchResults = [];
     const embedding = embeddingResponse.data[0].embedding;
     const client = new MongoClient(uri);
     try {
@@ -43,20 +43,20 @@ export async function GET(req) {
       const database = client.db("RestInTweet"); // Replace with your database name
       const collection = database.collection("tweets"); // Replace with your collection name
 
-      const searchResults = await vectorSearch(embedding, collection);
+      searchResults = await vectorSearch(embedding, collection);
 
-      for (const tweet of searchResults) {
-        console.log({ tweet });
-        const tweetData = await getTweet(tweet.id_str);
-        tweetData && tweets.push(tweetData);
-      }
-      console.log({ tweets });
+      // for (const tweet of searchResults) {
+      //   console.log({ tweet });
+      //   const tweetData = await getTweet(tweet.id_str);
+      //   tweetData && tweets.push(tweetData);
+      // }
+      console.log({ searchResults });
     } finally {
       await client.close();
     }
 
     // Return the results as JSON
-    return NextResponse.json(tweets);
+    return NextResponse.json(searchResults);
   } catch (error) {
     console.error({ error });
     return NextResponse.json(

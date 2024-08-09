@@ -2,7 +2,8 @@
 import React from "react";
 import { search, stats, keywords } from "@/app/lib/data";
 
-const Stats: React.FC = async () => {
+export default async function Stats() {
+  console.log("Stats");
   const statsData = await stats();
   console.log({ statsData });
 
@@ -81,6 +82,4 @@ const Stats: React.FC = async () => {
       </div>
     </section>
   );
-};
-
-export default Stats;
+}
