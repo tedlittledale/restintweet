@@ -16,9 +16,9 @@ export default async function Home({
   const query = searchParams?.query || "";
   let results = [];
   console.log({ query });
-  if (query && query !== "") {
-    results = await search({ text: query });
-  }
+  // if (query && query !== "") {
+  //   results = await search({ text: query });
+  // }
   const statsData = await stats();
   console.log({ statsData });
   const keywordsData = await keywords();
@@ -109,22 +109,7 @@ export default async function Home({
             </div>
           </div>
         </section>
-        <section>
-          <h2 className="text-2xl font-bold mb-4">Word Cloud</h2>
-          {/* Add your word cloud content here */}
-          {keywordsData && (
-            <WordCloud
-              words={
-                keywordsData
-                  ? keywordsData.map(({ count, keyword }) => ({
-                      text: keyword,
-                      value: count,
-                    }))
-                  : []
-              }
-            />
-          )}
-        </section>
+        <section></section>
       </div>
     </main>
   );
