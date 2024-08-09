@@ -4,6 +4,8 @@ import { getTweet, type Tweet } from "react-tweet/api";
 
 export default function Tweets({ query }: { query: string }) {
   const [results, setResults] = useState<Tweet[]>([]);
+  const [toggle, setToggle] = useState<string>("tweets");
+  const [likeResults, setLikeResults] = useState<Tweet[]>([]);
   useEffect(() => {
     const fetchTweets = async (query: string) => {
       setResults([]);
@@ -14,12 +16,47 @@ export default function Tweets({ query }: { query: string }) {
 
       setResults(tweets);
     };
+    const fetchLikes = async (query: string) => {
+      setLikeResults([]);
+      const likes = await fetch(`/api/searchlikes?q=${query}`).then((res) =>
+        res.json()
+      );
+      console.log({ likes });
+
+      setLikeResults(likes);
+    };
     fetchTweets(query);
+    fetchLikes(query);
     return () => {};
   }, [query]);
 
   return (
     <>
+      <div className="inline-flex rounded-md shadow-sm mt-6" role="group">
+        <button
+          type="button"
+          onClick={() => setToggle("tweets")}
+          className={`${
+            toggle === "tweets"
+              ? "text-white bg-blue-900"
+              : "text-blue-900 bg-white"
+          } px-4 py-2 text-sm font-medium  bg-white border border-gray-200 rounded-s-lg`}
+        >
+          Tweets / Retweets
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setToggle("likes")}
+          className={`${
+            toggle === "likes"
+              ? "text-white bg-blue-900"
+              : "text-blue-900 bg-white"
+          } px-4 py-2 text-sm font-medium border border-gray-200 rounded-e-lg`}
+        >
+          Likes
+        </button>
+      </div>
       {results.length > 0 ? (
         results.map((tweet: any) => (
           <EmbeddedTweet key={tweet.id_str} tweet={tweet} />
