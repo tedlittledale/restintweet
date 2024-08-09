@@ -23,7 +23,7 @@ export default function Stats() {
             </div>
             <p
               className={`
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          truncate rounded-xl bg-white px-4 py-4 text-center text-2xl`}
             >
               {new Intl.NumberFormat().format(statsData?.tweets)}
             </p>
@@ -34,7 +34,7 @@ export default function Stats() {
             </div>
             <p
               className={`
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          truncate rounded-xl bg-white px-4 py-4 text-center text-2xl`}
             >
               {new Intl.NumberFormat().format(statsData?.retweets)}
             </p>
@@ -45,7 +45,7 @@ export default function Stats() {
             </div>
             <p
               className={`
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          truncate rounded-xl bg-white px-4 py-4 text-center text-2xl`}
             >
               {new Intl.NumberFormat().format(statsData?.favorite_count)}
             </p>
@@ -56,7 +56,7 @@ export default function Stats() {
             </div>
             <p
               className={`
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          truncate rounded-xl bg-white px-4 py-4 text-center text-2xl`}
             >
               {new Intl.NumberFormat().format(statsData?.retweet_count)}
             </p>
@@ -67,7 +67,7 @@ export default function Stats() {
             </div>
             <p
               className={`
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          truncate rounded-xl bg-white px-4 py-4 text-center text-2xl`}
             >
               {new Intl.NumberFormat().format(statsData?.hashtags_count)}
             </p>
@@ -79,7 +79,7 @@ export default function Stats() {
             </div>
             <p
               className={`
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          truncate rounded-xl bg-white px-4 py-4 text-center text-2xl`}
             >
               {new Intl.NumberFormat().format(
                 statsData?.video_count + statsData?.image_count
