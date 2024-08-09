@@ -27,6 +27,7 @@ export default function Home({
 
           {query !== "" && <Tweets query={query} />}
         </div>
+        {query === "" && <Stats />}
 
         <section></section>
       </div>
