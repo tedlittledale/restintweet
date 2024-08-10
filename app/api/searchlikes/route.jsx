@@ -47,7 +47,7 @@ export async function GET(req) {
 
       for (const tweet of searchResults) {
         console.log({ tweet });
-        const tweetData = await getTweet(tweet.id_str);
+        const tweetData = await getTweet(tweet.tweetId);
         tweetData && tweets.push(tweetData);
       }
       console.log({ tweets });
