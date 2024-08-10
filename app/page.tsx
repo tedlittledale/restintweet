@@ -18,7 +18,7 @@ export default function Home({
   // const keywordsData = await keywords();
   // console.log({ keywordsData });
   return (
-    <main className="flex min-h-screen flex-col items-center text-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center text-center justify-between p-6 sm:p-24">
       <div className="w-full max-w-xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center text-white">
           Rest In Tweet

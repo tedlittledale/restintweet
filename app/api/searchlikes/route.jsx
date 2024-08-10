@@ -28,7 +28,7 @@ async function vectorSearch(embedding, collection) {
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const query = searchParams.get("q") || "";
-
+  console.log({ query });
   try {
     const embeddingResponse = await openai.embeddings.create({
       model: "text-embedding-ada-002",
@@ -41,14 +41,16 @@ export async function GET(req) {
     try {
       await client.connect();
       const database = client.db("RestInTweet"); // Replace with your database name
-      const collection = database.collection("tweets"); // Replace with your collection name
+      const collection = database.collection("likes"); // Replace with your collection name
 
       const searchResults = await vectorSearch(embedding, collection);
 
       for (const tweet of searchResults) {
-        const tweetData = await getTweet(tweet.id_str);
+        console.log({ tweet });
+        const tweetData = await getTweet(tweet.tweetId);
         tweetData && tweets.push(tweetData);
       }
+      console.log({ tweets });
     } finally {
       await client.close();
     }
