@@ -49,9 +49,11 @@ export default function Keywords({ visible = true }: { visible: boolean }) {
 
   return (
     <div
-      className={`w-full my-6 relative z-0 ${visible ? "visible" : "hidden"}`}
+      className={`w-full my-6 relative z-0 ${
+        visible ? "visible" : "hidden"
+      } md:scale-150 `}
       ref={containerRef}
-      style={{ transform: "scale(1.5)", transformOrigin: "center" }}
+      style={{ transformOrigin: "center" }}
     >
       {!!keywordsData?.length ? (
         <WordCloud
