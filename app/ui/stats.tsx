@@ -16,7 +16,7 @@ const Stat = ({ title, value }: { title: String; value: number }) => {
   );
 };
 
-export default function Stats() {
+export default function Stats({ visible = true }: { visible: boolean }) {
   console.log("Stats");
   const [statsData, setStatsData] = useState<any>();
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Stats() {
   }, []);
 
   return (
-    <section>
+    <section className={`${visible ? "visible" : "hidden"}`}>
       {statsData && (
         <div className="grid grid-cols-3 gap-2 sm:gap-4">
           <Stat title="Tweets sent" value={statsData?.tweets} />

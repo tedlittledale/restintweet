@@ -34,12 +34,11 @@ export default function Home({
 
           {query !== "" && <Tweets query={query} />}
         </div>
-        {query === "" && (
-          <>
-            <Stats />
-            <Keywords />
-          </>
-        )}
+
+        <>
+          <Keywords visible={query === ""} />
+          <Stats visible={query === ""} />
+        </>
 
         <section></section>
       </div>

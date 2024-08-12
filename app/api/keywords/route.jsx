@@ -15,9 +15,12 @@ export async function GET(req) {
       await client.connect();
       const database = client.db("RestInTweet"); // Replace with your database name
       const collection = database.collection("keywords"); // Replace with your collection name
-
-      //fetch all the keywords from the keywords collection
-      keywords = await collection.find().toArray();
+      // Fetch the top 100 keywords based on the highest count
+      keywords = await collection
+        .find()
+        .sort({ count: -1 })
+        .limit(200)
+        .toArray();
     } finally {
       await client.close();
     }

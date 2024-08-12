@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 
 import WordCloud from "react-d3-cloud";
 
@@ -10,12 +10,68 @@ const data = [
   { text: "duck", value: 10 },
 ];
 
-const Cloud = () => {
+export default function Keywords({ visible = true }: { visible: boolean }) {
+  console.log("Stats");
+  const [keywordsData, setKeywordsData] = useState<any>();
+  useEffect(() => {
+    const fetchStats = async () => {
+      const stats = await fetch(`/api/keywords`).then((res) => res.json());
+      console.log({ stats });
+      setKeywordsData(stats);
+    };
+    fetchStats();
+    return () => {};
+  }, []);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+
+  console.log({ containerWidth, keywordsData });
+  useEffect(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth);
+      const handleResize = () => {
+        containerRef.current &&
+          setContainerWidth(containerRef.current.offsetWidth);
+      };
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, []);
+
+  const onWordClick = useCallback((e: any) => {
+    console.log();
+    document
+      .getElementById("search")
+      ?.setAttribute("value", e.syntheticEvent.target.textContent);
+  }, []);
+
   return (
-    <div className="w-full h-[400px]">
-      <WordCloud data={data} width={800} height={400} />
+    <div
+      className={`w-full my-6 relative z-0 ${visible ? "visible" : "hidden"}`}
+      ref={containerRef}
+      style={{ transform: "scale(1.5)", transformOrigin: "center" }}
+    >
+      {!!keywordsData?.length ? (
+        <WordCloud
+          data={
+            keywordsData
+              ? keywordsData.map(
+                  ({ keyword, count }: { keyword: string; count: number }) => ({
+                    text: keyword,
+                    value: count,
+                  })
+                )
+              : []
+          }
+          onWordClick={onWordClick}
+          rotate={(word) => 0}
+          fill={() => "#fff"}
+          width={containerWidth}
+          height={containerWidth / 2}
+        />
+      ) : null}
     </div>
   );
-};
-
-export default Cloud;
+}

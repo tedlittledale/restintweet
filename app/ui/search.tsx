@@ -21,7 +21,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   });
   const query = searchParams.get("query")?.toString() || "";
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
+    <div className={`relative z-10 flex flex-1 flex-shrink-0 `}>
       <label htmlFor="search" className="sr-only relative">
         Search
       </label>
@@ -34,16 +34,25 @@ export default function Search({ placeholder }: { placeholder: string }) {
           }
         }}
       >
-        <input
-          ref={inputRef}
-          className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-          placeholder={placeholder}
-          defaultValue={query}
-        />
+        <div className="flex">
+          <input
+            id="search"
+            ref={inputRef}
+            className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+            placeholder={placeholder}
+            defaultValue={query}
+          />
+          <button
+            type="submit"
+            className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md  cursor-pointer"
+          >
+            Go
+          </button>
+        </div>
       </form>
       {query?.length ? (
         <button
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"
+          className="absolute right-[75px] top-1/2 transform -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"
           onClick={() => {
             handleSearch("");
             inputRef.current?.focus();
@@ -52,7 +61,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
             }
           }}
         >
-          Clear
+          x
         </button>
       ) : null}
       <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />

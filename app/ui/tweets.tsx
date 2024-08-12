@@ -32,7 +32,7 @@ export default function Tweets({ query }: { query: string }) {
 
   return (
     <>
-      <div className="inline-flex rounded-md shadow-sm mt-6" role="group">
+      <div className="inline-flex rounded-md shadow-sm mt-6 " role="group">
         <button
           type="button"
           onClick={() => setToggle("tweets")}
@@ -58,7 +58,7 @@ export default function Tweets({ query }: { query: string }) {
         </button>
       </div>
       {toggle === "tweets" ? (
-        <>
+        <div className="text-left">
           {results.length > 0 ? (
             results.map((tweet: any) => (
               <EmbeddedTweet key={tweet.id_str} tweet={tweet} />
@@ -83,7 +83,7 @@ export default function Tweets({ query }: { query: string }) {
               </div>
             </>
           )}
-        </>
+        </div>
       ) : (
         <>
           {likeResults.length > 0 ? (
