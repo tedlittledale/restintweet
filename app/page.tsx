@@ -3,6 +3,7 @@
 import Search from "./ui/search";
 import Tweets from "./ui/tweets";
 import Stats from "./ui/stats";
+import Keywords from "./ui/keywords";
 
 export default function Home({
   searchParams,
@@ -33,7 +34,12 @@ export default function Home({
 
           {query !== "" && <Tweets query={query} />}
         </div>
-        {query === "" && <Stats />}
+        {query === "" && (
+          <>
+            <Stats />
+            <Keywords />
+          </>
+        )}
 
         <section></section>
       </div>
