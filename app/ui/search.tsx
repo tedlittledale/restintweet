@@ -55,7 +55,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
           className="absolute right-[75px] top-1/2 transform -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"
           onClick={() => {
             handleSearch("");
-            inputRef.current?.focus();
+
             if (inputRef.current) {
               inputRef.current.value = "";
             }
