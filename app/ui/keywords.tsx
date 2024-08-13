@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, memo } from "react";
 
 import WordCloud from "react-d3-cloud";
 
@@ -10,7 +10,13 @@ const data = [
   { text: "duck", value: 10 },
 ];
 
-export default function Keywords({ visible = true }: { visible: boolean }) {
+const Keywords = ({
+  visible = true,
+  setSelectedKeyword,
+}: {
+  visible: boolean;
+  setSelectedKeyword: any;
+}) => {
   console.log("Stats");
   const [keywordsData, setKeywordsData] = useState<any>();
   useEffect(() => {
@@ -41,10 +47,7 @@ export default function Keywords({ visible = true }: { visible: boolean }) {
   }, []);
 
   const onWordClick = useCallback((e: any) => {
-    console.log();
-    document
-      .getElementById("search")
-      ?.setAttribute("value", e.syntheticEvent.target.textContent);
+    setSelectedKeyword(e.syntheticEvent.target.textContent);
   }, []);
 
   return (
@@ -76,4 +79,6 @@ export default function Keywords({ visible = true }: { visible: boolean }) {
       ) : null}
     </div>
   );
-}
+};
+
+export default memo(Keywords);

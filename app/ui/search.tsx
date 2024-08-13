@@ -1,10 +1,18 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
-export default function Search({ placeholder }: { placeholder: string }) {
+export default function Search({
+  placeholder,
+  selectedKeyword,
+  setSelectedKeyword,
+}: {
+  placeholder: string;
+  selectedKeyword: string;
+  setSelectedKeyword: (keyword: string) => void;
+}) {
   const searchParams = useSearchParams();
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
@@ -20,6 +28,15 @@ export default function Search({ placeholder }: { placeholder: string }) {
     replace(`${pathname}?${params.toString()}`);
   });
   const query = searchParams.get("query")?.toString() || "";
+  console.log({ query, selectedKeyword });
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = selectedKeyword || query;
+    }
+
+    return () => {};
+  }, [selectedKeyword, query]);
+
   return (
     <div className={`relative z-10 flex flex-1 flex-shrink-0 `}>
       <label htmlFor="search" className="sr-only relative">
@@ -40,7 +57,10 @@ export default function Search({ placeholder }: { placeholder: string }) {
             ref={inputRef}
             className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
             placeholder={placeholder}
-            defaultValue={query}
+            defaultValue={selectedKeyword || query}
+            onChange={(e) => {
+              selectedKeyword && setSelectedKeyword("");
+            }}
           />
           <button
             type="submit"

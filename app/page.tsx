@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import Search from "./ui/search";
 import Tweets from "./ui/tweets";
 import Stats from "./ui/stats";
@@ -15,7 +15,7 @@ export default function Home({
 }) {
   const query = searchParams?.query || "";
   console.log({ query });
-
+  const [selectedKeyword, setSelectedKeyword] = useState<string | null>(null);
   // const keywordsData = await keywords();
   // console.log({ keywordsData });
   return (
@@ -30,13 +30,20 @@ export default function Home({
           good old days (also includes Tweets from the bad new days).
         </p>
         <div className="mb-8">
-          <Search placeholder="Show me tweets about..." />
+          <Search
+            setSelectedKeyword={setSelectedKeyword}
+            placeholder="Show me tweets about..."
+            selectedKeyword={selectedKeyword || ""}
+          />
 
           {query !== null && query.trim() !== "" && <Tweets query={query} />}
         </div>
 
         <>
-          <Keywords visible={query === null || query.trim() === ""} />
+          <Keywords
+            visible={query === null || query.trim() === ""}
+            setSelectedKeyword={setSelectedKeyword}
+          />
           <Stats visible={query === null || query.trim() === ""} />
         </>
 
