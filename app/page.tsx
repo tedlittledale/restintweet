@@ -32,12 +32,12 @@ export default function Home({
         <div className="mb-8">
           <Search placeholder="Show me tweets about..." />
 
-          {query !== "" && <Tweets query={query} />}
+          {query !== null && query.trim() !== "" && <Tweets query={query} />}
         </div>
 
         <>
-          <Keywords visible={query === ""} />
-          <Stats visible={query === ""} />
+          <Keywords visible={query === null || query.trim() === ""} />
+          <Stats visible={query === null || query.trim() === ""} />
         </>
 
         <section></section>
